@@ -6,6 +6,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
+using Microsoft.Extensions.Configuration;
+using System.Runtime.InteropServices;
+
 namespace PiholeJP.Pages
 {
     public class IndexModel : PageModel
@@ -26,11 +29,12 @@ namespace PiholeJP.Pages
 
         public void OnGet()
         {
-            if(string.IsNullOrWhiteSpace(action))
+            if (string.IsNullOrWhiteSpace(action))
             {
                 //action = "status";
             }
-            else
+            /// https://www.michaco.net/blog/EnvironmentVariablesAndConfigurationInASPNETCoreApps
+            else if (System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
             {
                 Console.WriteLine($"action: {action}");
                 string piholeResponse = BashCommand.run(action);
