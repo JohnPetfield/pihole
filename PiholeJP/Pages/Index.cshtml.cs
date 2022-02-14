@@ -20,7 +20,6 @@ namespace PiholeJP.Pages
             _logger = logger;
         }
 
-
         [BindProperty(SupportsGet = true)]
         public string action { get; set; }
 
@@ -28,6 +27,16 @@ namespace PiholeJP.Pages
         public string piholeResponse{ get; set; }
 
         public void OnGet()
+        {
+            runBash();
+        }
+
+        public IActionResult OnPost()
+        {
+            runBash();
+            return RedirectToPage("/Index" /*, new { action = action}*/);
+        }
+        private void runBash()
         {
             if (string.IsNullOrWhiteSpace(action))
             {
@@ -40,10 +49,6 @@ namespace PiholeJP.Pages
                 string piholeResponse = BashCommand.run(action);
                 Console.WriteLine($"piholeResponse: {piholeResponse}");
             }
-        }
-
-        public void OnPost()
-        {
 
         }
     }

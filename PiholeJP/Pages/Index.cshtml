@@ -4,12 +4,16 @@
     ViewData["Title"] = "Home page";
 }
 
+<form method="post">
+    <input type="text" asp-for="action" />
+</form>
+
+
 Model.action here:
 <br />
 @Model.action
 
-<br />
-<br />
+<br /><br />
 Bash Command response here:
 <br />
 @Model.piholeResponse
