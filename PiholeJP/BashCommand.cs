@@ -20,7 +20,7 @@ namespace PiholeJP
             
             string command = "sudo pihole " + action;
 
-            Console.WriteLine($"command: {command}");
+            //Console.WriteLine($"BashCommand.run() - command: {command}");
             
 
             string result = "";
@@ -35,6 +35,8 @@ namespace PiholeJP
 
                 result += proc.StandardOutput.ReadToEnd();
                 result += proc.StandardError.ReadToEnd();
+
+                //Console.WriteLine($"result: {result}"); 
 
                 proc.WaitForExit();
             }

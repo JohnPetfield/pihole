@@ -20,7 +20,8 @@ namespace PiholeJP.Pages
             _logger = logger;
         }
 
-        [BindProperty(SupportsGet = true)]
+        [BindProperty]
+        //[BindProperty(SupportsGet = true)]
         public string action { get; set; }
 
         [BindProperty]
@@ -28,28 +29,33 @@ namespace PiholeJP.Pages
 
         public void OnGet()
         {
-            runBash();
+            //runBash();
         }
 
-        public IActionResult OnPost()
+        public void OnPost()
         {
             runBash();
-            return RedirectToPage("/Index" /*, new { action = action}*/);
+            //return RedirectToPage("/Index" , new { piholeResponse = piholeResponse });
+            //return RedirectToPage("/Index",
         }
         private void runBash()
         {
+            //Console.WriteLine("runBash()");
+
             if (string.IsNullOrWhiteSpace(action))
             {
                 //action = "status";
+                piholeResponse = "action blank";
             }
             /// https://www.michaco.net/blog/EnvironmentVariablesAndConfigurationInASPNETCoreApps
             else if (System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
             {
                 Console.WriteLine($"action: {action}");
-                string piholeResponse = BashCommand.run(action);
-                Console.WriteLine($"piholeResponse: {piholeResponse}");
+                piholeResponse = BashCommand.run(action);
             }
-
+            else piholeResponse = "On Windows - no action";
+            
+            //Console.WriteLine($"piholeResponse: {piholeResponse}");
         }
     }
 }

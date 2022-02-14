@@ -9,11 +9,28 @@
 </form>
 
 
+<!--
+<form method="post" class="col-sm-6" data-ajax="true"
+      data-ajax-method="post" data-ajax-complete="completed">
+    <input type="text" asp-for="action" />
+</form>
+
+@section scripts{
+    <script>
+    completed = () => {
+        alert('Posted using Unobtrusive AJAX');
+        console.log('Posted using Unobtrusive AJAX')
+    };
+    </script>
+}
+-->
+
 Model.action here:
 <br />
 @Model.action
 
-<br /><br />
+<br />
+<br />
 Bash Command response here:
 <br />
 @Model.piholeResponse
