@@ -38,7 +38,7 @@ namespace PiholeJP
                 result += proc.StandardOutput.ReadToEnd();
                 result += proc.StandardError.ReadToEnd();
 
-                Console.WriteLine($"result: {result}"); 
+                //Console.WriteLine($"result: {result}"); 
 
                 proc.WaitForExit();
             }

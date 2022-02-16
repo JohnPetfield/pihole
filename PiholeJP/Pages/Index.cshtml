@@ -4,47 +4,24 @@
     ViewData["Title"] = "Home page";
 }
 
-<!--
-<form method="post">
-    <input type="text" asp-for="action" />
-</form>
-
-<form method="post">
-    <input type="text" asp-for="action" />
-</form>
--->
-<form method="post">
-    <input type="submit" value="Status" asp-for="action" />
-</form>
-<form method="post">
-    <input type="submit" value="Enable" asp-for="action" />
-</form>
-<form method="post">
-    <input type="submit" value="Disable" asp-for="action" />
-</form>
-
-<!--
-<form method="post" class="col-sm-6" data-ajax="true"
-      data-ajax-method="post" data-ajax-complete="completed">
-    <input type="text" asp-for="action" />
-</form>
-
-@section scripts{
-    <script>
-    completed = () => {
-        alert('Posted using Unobtrusive AJAX');
-        console.log('Posted using Unobtrusive AJAX')
-    };
-    </script>
+@{
+    bool enable = (@Model.piholeResponse == "enabled") ? true : false;
 }
--->
+
+<form method="post">
+    <input type="submit" value="Status" asp-for="action" id="Status" />
+</form>
+<form method="post">
+    <input type="submit" value="Enable" asp-for="action" id="Enable" disabled="@enable" />
+</form>
+<form method="post">
+    <input type="submit" value="Disable" asp-for="action" id="Disable" disabled="@(!enable)" />
+</form>
 
 Model.action here:
 <br />
 @Model.action
-
-<br />
-<br />
+<br /><br /><br />
 Bash Command response here:
 <br />
 @Model.piholeResponse

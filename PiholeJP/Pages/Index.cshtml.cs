@@ -29,7 +29,10 @@ namespace PiholeJP.Pages
 
         public void OnGet()
         {
-            action = "status";
+            if (action != "enable" && action != "disable")
+                action = "status";
+
+            //action = "status";
             runBash();
         }
 
@@ -56,7 +59,20 @@ namespace PiholeJP.Pages
             }
             else piholeResponse = "On Windows - no action";
             
-            //Console.WriteLine($"piholeResponse: {piholeResponse}");
+            if(piholeResponse.ToLower().Contains("enabling blocking") || 
+               piholeResponse.ToLower().Contains("blocking already enabled") ||
+               piholeResponse.ToLower().Contains("blocking is enabled"))
+            {
+                piholeResponse = "enabled";
+            }
+            else if (piholeResponse.ToLower().Contains("disabling blocking") ||
+                     piholeResponse.ToLower().Contains("blocking already disabled") ||
+                     piholeResponse.ToLower().Contains("blocking is disabled"))
+            {
+                piholeResponse = "disabled";
+            }
+            Console.WriteLine($"cleansed response: {piholeResponse}");
+
         }
     }
 }
