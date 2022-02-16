@@ -29,7 +29,8 @@ namespace PiholeJP.Pages
 
         public void OnGet()
         {
-            //runBash();
+            action = "status";
+            runBash();
         }
 
         public void OnPost()

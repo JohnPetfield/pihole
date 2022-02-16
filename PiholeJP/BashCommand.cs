@@ -11,6 +11,8 @@ namespace PiholeJP
         {
             //https://stackoverflow.com/questions/46419222/execute-linux-command-on-centos-using-dotnet-core
 
+            _action = _action.ToLower();
+
             string action;
             if (_action == "enable")
                 action = "enable";
@@ -36,7 +38,7 @@ namespace PiholeJP
                 result += proc.StandardOutput.ReadToEnd();
                 result += proc.StandardError.ReadToEnd();
 
-                //Console.WriteLine($"result: {result}"); 
+                Console.WriteLine($"result: {result}"); 
 
                 proc.WaitForExit();
             }
