@@ -1,0 +1,86 @@
+﻿@page
+@model BlockListsModel
+@{
+    ViewData["Title"] = "Block Lists";
+}
+<style>
+    table {
+        /*border: 1px solid;*/
+        /*width: 100%;*/
+        /*border-collapse: collapse;*/
+    }
+
+    .child {
+        display: inline-block;
+    }
+
+    .btn {
+        vertical-align: top;
+    }
+</style>
+
+<h5 style="color:red">@Model.Message</h5>
+<h1>@ViewData["Title"]</h1>
+<h5>Black List:</h5>
+<div>
+    @if (Model.BlackList== null)
+    {
+    <div>BlackList empty.</div>
+    }
+    else
+    {
+    <table>
+        @foreach (var item in Model.BlackList)
+        {
+        <tr>
+            <td style="width:300px">
+                @Html.DisplayFor(model => item)
+            </td>
+            <td>D -</td>
+            <td>S -</td>
+            <td>U</td>
+        </tr>
+        }
+    </table>
+    }
+</div>
+
+<form asp-page-handler="Add" method="post">
+    <div class="form-group" style="white-space:nowrap;width:388px">
+        <input asp-for="TestVar" class="form-control child" />
+        <input type="submit" value="+" class="btn btn-primary child" />
+        <input type="hidden" name="ListType" value="b" />
+    </div>
+</form>
+
+<h5>White List:</h5>
+<div>
+    @if (Model.WhiteList == null)
+    {
+    <div>WhiteList empty.</div>
+    }
+    else
+    {
+    <table>
+        @foreach (var item in Model.WhiteList)
+        {
+        <tr>
+            <td style="width:300px">
+                @Html.DisplayFor(model => item)
+            </td>
+            <td>D -</td>
+            <td>S -</td>
+            <td>U</td>
+        </tr>
+        }
+    </table>
+    }
+</div>
+
+<form asp-page-handler="Add" method="post">
+    <div class="form-group" style="white-space:nowrap;width:388px">
+        <input asp-for="TestVar" class="form-control child" />
+        <input type="submit" value="+" class="btn btn-primary child" />
+        <input type="hidden" name="ListType" value="w"/>
+    </div>
+</form>

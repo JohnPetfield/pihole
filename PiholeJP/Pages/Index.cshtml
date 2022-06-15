@@ -8,9 +8,11 @@
     bool enable = (@Model.piholeResponse == "enabled") ? true : false;
 }
 
+<!--
 <form method="post">
     <input type="submit" value="Status" asp-for="action" id="Status" />
 </form>
+-->
 <form method="post">
     <input type="submit" value="Enable" asp-for="action" id="Enable" disabled="@enable" />
 </form>
@@ -18,6 +20,7 @@
     <input type="submit" value="Disable" asp-for="action" id="Disable" disabled="@(!enable)" />
 </form>
 
+<!--
 Model.action here:
 <br />
 @Model.action
@@ -25,3 +28,4 @@ Model.action here:
 Bash Command response here:
 <br />
 @Model.piholeResponse
+    -->

@@ -30,7 +30,9 @@ namespace PiholeJP.Pages
         public void OnGet()
         {
             if (action != "enable" && action != "disable")
+            {
                 action = "status";
+            }
 
             //action = "status";
             runBash();
@@ -55,7 +57,19 @@ namespace PiholeJP.Pages
             else if (System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
             {
                 Console.WriteLine($"action: {action}");
-                piholeResponse = BashCommand.run(action);
+
+                string _action = action.ToLower();
+
+                //string action;
+                if (_action == "enable")
+                    action = "enable";
+                else if (_action == "disable")
+                    action = "disable";
+                else action = "status";
+
+                string command = "sudo pihole " + action;
+
+                piholeResponse = BashCommand.run(command);
             }
             else piholeResponse = "On Windows - no action";
             
@@ -72,7 +86,6 @@ namespace PiholeJP.Pages
                 piholeResponse = "disabled";
             }
             Console.WriteLine($"cleansed response: {piholeResponse}");
-
         }
     }
 }
