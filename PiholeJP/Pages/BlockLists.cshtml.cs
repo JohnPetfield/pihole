@@ -28,7 +28,7 @@ namespace PiholeJP.Pages
         public IActionResult OnPost()
         {
             //Message += "Run OnPost()";
-            Console.WriteLine($"TestVar {TestVar}");
+            Console.WriteLine($"TestVar {Address}");
             Console.WriteLine($"Run OnPost()");
 
             // Assuming only 'adding' to a block list for now 
@@ -42,12 +42,12 @@ namespace PiholeJP.Pages
         public IActionResult OnPostAdd(string ListType)
         {
             //Message += "Run OnPost()";
-            Console.WriteLine($"TestVar {TestVar}");
+            Console.WriteLine($"TestVar {Address}");
             Console.WriteLine($"Run OnPostAdd()");
 
             // Assuming only 'adding' to a block list for now 
             // until i sort out
-            AddToABlockList(ListType, TestVar);
+            AddToABlockList(ListType, Address);
 
             ///  https://exceptionnotfound.net/implementing-post-redirect-get-in-asp-net-core-razor-pages/
             return RedirectToPage("/BlockLists");
@@ -60,7 +60,7 @@ namespace PiholeJP.Pages
         public string PiResponse{ get; set; }
         public string Message{ get; set; }
         [BindProperty]
-        public string TestVar{ get; set; }
+        public string Address{ get; set; }
 
         public List<string> WhiteList;
         public List<string> BlackList;
