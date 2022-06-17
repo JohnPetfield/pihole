@@ -12,47 +12,53 @@ namespace PiholeJP.Pages
     public class BlockListsModel : PageModel
     {
         private readonly ILogger<BlockListsModel> _logger;
-
         public BlockListsModel(ILogger<BlockListsModel> logger)
         {
             _logger = logger;
         }
-
         public void OnGet()
         {
             GetAllBlockLists();
-            //Message += "Run OnGet()";
             Console.WriteLine("Run OnGet()");
         }
-
+        /*
         public IActionResult OnPost()
         {
-            //Message += "Run OnPost()";
             Console.WriteLine($"TestVar {Address}");
             Console.WriteLine($"Run OnPost()");
-
-            // Assuming only 'adding' to a block list for now 
-            // until i sort out
-            //AddToABlockList("b", TestVar);
-
             return RedirectToPage("/BlockLists");
-        }
+        }*/
 
         ///https://www.learnrazorpages.com/razor-pages/handler-methods
         public IActionResult OnPostAdd(string ListType)
         {
-            //Message += "Run OnPost()";
             Console.WriteLine($"TestVar {Address}");
             Console.WriteLine($"Run OnPostAdd()");
 
-            // Assuming only 'adding' to a block list for now 
-            // until i sort out
-            AddToABlockList(ListType, Address);
+            EditBlockList(ListType, Address);
 
+            Console.WriteLine("about to redirect to GET");
             ///  https://exceptionnotfound.net/implementing-post-redirect-get-in-asp-net-core-razor-pages/
             return RedirectToPage("/BlockLists");
         }
-        
+
+        /// https://www.codeproject.com/Articles/1207962/Simple-CRUD-Operation-with-Razor-Pages#:~:text=For%20adding%20Razor%20page%2C%20just,and%20click%20on%20Add%20button.
+        public IActionResult OnGetDelete(string id, string listtype)
+        {
+            /*so in html asp-route-listtype is asp-route-{varname}
+              where i choose the variable and set the value in html
+              then on the get here, it is passed is as a parameter 
+              with the same varname */
+            Console.WriteLine($"Run OnGetDelete()");
+            Console.WriteLine($"URL {id} listtype {listtype} ");
+
+            EditBlockList(listtype, id, true);
+
+            Console.WriteLine("about to redirect to GET");
+            ///  https://exceptionnotfound.net/implementing-post-redirect-get-in-asp-net-core-razor-pages/
+            return RedirectToPage("/BlockLists");
+        }
+
         public string NewBlackListItem;
         public string NewWhiteListItem;
         [BindProperty]
@@ -65,12 +71,14 @@ namespace PiholeJP.Pages
         public List<string> WhiteList;
         public List<string> BlackList;
 
-        private void AddToABlockList(string _listType, string address)
+        private void EditBlockList(string _listType, string address, bool delete = false)
         {
             string listType = "b";
             if (_listType.ToLower() == "w")
                 listType = "w";
-            action = "sudo pihole -" + listType + " " + address;
+            action = "sudo pihole -" + listType + 
+                (delete?" -d ": " ")
+                + address;
 
             /// https://www.michaco.net/blog/EnvironmentVariablesAndConfigurationInASPNETCoreApps
             if (System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(OSPlatform.Linux))

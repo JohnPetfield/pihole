@@ -36,7 +36,12 @@
             <td style="width:300px">
                 @Html.DisplayFor(model => item)
             </td>
-            <td>D -</td>
+            <td>
+                <a asp-page="./BlockLists" onclick="return confirm
+                    ('Are you sure you want to delete this item? @item');"
+                   asp-page-handler="Delete" asp-route-id="@item"
+                   asp-route-listtype="b">Delete</a>
+            </td>
             <td>S -</td>
             <td>U</td>
         </tr>
@@ -68,7 +73,12 @@
             <td style="width:300px">
                 @Html.DisplayFor(model => item)
             </td>
-            <td>D -</td>
+            <td>
+                <a asp-page="./BlockLists" onclick="return confirm
+                    ('Are you sure you want to delete this item? @item');"
+                   asp-page-handler="Delete" asp-route-id="@item"
+                   asp-route-listtype="w">Delete</a>
+            </td>
             <td>S -</td>
             <td>U</td>
         </tr>
