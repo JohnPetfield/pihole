@@ -59,6 +59,25 @@ namespace PiholeJP.Pages
             return RedirectToPage("/BlockLists");
         }
 
+        public IActionResult OnGetSwap(string id, string listtype)
+        {
+            Console.WriteLine($"Run OnGetSwap()");
+            Console.WriteLine($"URL {id} listtype {listtype} ");
+
+            // Delete from current blocklist 
+            EditBlockList(listtype, id, true);
+
+            string otherList = (listtype == "w" ? "b" : "w");
+
+            // Add domain to the other list
+            EditBlockList(otherList, id);
+
+
+            Console.WriteLine("about to redirect to GET");
+            return RedirectToPage("/BlockLists");
+        }
+
+
         public string NewBlackListItem;
         public string NewWhiteListItem;
         [BindProperty]

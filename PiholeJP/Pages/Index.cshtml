@@ -7,18 +7,27 @@
 @{
     bool enable = (@Model.piholeResponse == "enabled") ? true : false;
 }
+<style>
+    .button{
+        width:80%;
+        margin:5px;
+        height:100px;
+    }
+</style>
 
 <!--
 <form method="post">
     <input type="submit" value="Status" asp-for="action" id="Status" />
 </form>
 -->
-<form method="post">
-    <input type="submit" value="Enable" asp-for="action" id="Enable" disabled="@enable" />
-</form>
-<form method="post">
-    <input type="submit" value="Disable" asp-for="action" id="Disable" disabled="@(!enable)" />
-</form>
+<center>
+    <form method="post">
+        <input class="button" type="submit" value="Enable" asp-for="action" id="Enable" disabled="@enable" />
+    </form>
+    <form method="post">
+        <input class="button" type="submit" value="Disable" asp-for="action" id="Disable" disabled="@(!enable)" />
+    </form>
+</center>
 
 <!--
 Model.action here:

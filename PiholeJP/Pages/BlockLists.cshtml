@@ -42,8 +42,12 @@
                    asp-page-handler="Delete" asp-route-id="@item"
                    asp-route-listtype="b">Delete</a>
             </td>
-            <td>S -</td>
-            <td>U</td>
+            <td>|</td>
+            <td>
+                <a asp-page="./BlockLists"
+                   asp-page-handler="Swap" asp-route-id="@item"
+                   asp-route-listtype="b">Swap</a>
+            </td>
         </tr>
         }
     </table>
@@ -79,8 +83,12 @@
                    asp-page-handler="Delete" asp-route-id="@item"
                    asp-route-listtype="w">Delete</a>
             </td>
-            <td>S -</td>
-            <td>U</td>
+            <td>|</td>
+            <td>
+                <a asp-page="./BlockLists"
+                   asp-page-handler="Swap" asp-route-id="@item"
+                   asp-route-listtype="w">Swap</a>
+            </td>
         </tr>
         }
     </table>
