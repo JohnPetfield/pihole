@@ -72,7 +72,6 @@ namespace PiholeJP.Pages
             // Add domain to the other list
             EditBlockList(otherList, id);
 
-
             Console.WriteLine("about to redirect to GET");
             return RedirectToPage("/BlockLists");
         }

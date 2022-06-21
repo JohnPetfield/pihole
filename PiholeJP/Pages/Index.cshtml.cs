@@ -38,11 +38,12 @@ namespace PiholeJP.Pages
             runBash();
         }
 
-        public void OnPost()
+        public IActionResult OnPost()
         {
             runBash();
             //return RedirectToPage("/Index" , new { piholeResponse = piholeResponse });
             //return RedirectToPage("/Index",
+            return RedirectToPage("/Index");
         }
         private void runBash()
         {
