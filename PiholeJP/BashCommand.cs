@@ -10,20 +10,6 @@ namespace PiholeJP
         static public string run(string command)
         {
             //https://stackoverflow.com/questions/46419222/execute-linux-command-on-centos-using-dotnet-core
-            /*
-            _action = _action.ToLower();
-
-            string action;
-            if (_action == "enable")
-                action = "enable";
-            else if (_action == "disable")
-                action = "disable";
-            else action = "status";
-            
-            string command = "sudo pihole " + action;
-            */
-            //Console.WriteLine($"BashCommand.run() - command: {command}");
-
             string result = "";
             using (System.Diagnostics.Process proc = new System.Diagnostics.Process())
             {
@@ -37,7 +23,6 @@ namespace PiholeJP
                 result += proc.StandardOutput.ReadToEnd();
                 result += proc.StandardError.ReadToEnd();
 
-                //Console.WriteLine($"result: {result}"); 
                 proc.WaitForExit();
             }
             return result;

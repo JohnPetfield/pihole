@@ -19,25 +19,13 @@ namespace PiholeJP.Pages
         public void OnGet()
         {
             GetAllBlockLists();
-            Console.WriteLine("Run OnGet()");
         }
-        /*
-        public IActionResult OnPost()
-        {
-            Console.WriteLine($"TestVar {Address}");
-            Console.WriteLine($"Run OnPost()");
-            return RedirectToPage("/BlockLists");
-        }*/
 
         ///https://www.learnrazorpages.com/razor-pages/handler-methods
         public IActionResult OnPostAdd(string ListType)
         {
-            Console.WriteLine($"TestVar {Address}");
-            Console.WriteLine($"Run OnPostAdd()");
-
             EditBlockList(ListType, Address);
 
-            Console.WriteLine("about to redirect to GET");
             ///  https://exceptionnotfound.net/implementing-post-redirect-get-in-asp-net-core-razor-pages/
             return RedirectToPage("/BlockLists");
         }
@@ -45,25 +33,19 @@ namespace PiholeJP.Pages
         /// https://www.codeproject.com/Articles/1207962/Simple-CRUD-Operation-with-Razor-Pages#:~:text=For%20adding%20Razor%20page%2C%20just,and%20click%20on%20Add%20button.
         public IActionResult OnGetDelete(string id, string listtype)
         {
-            /*so in html asp-route-listtype is asp-route-{varname}
+            /*in html asp-route-listtype is asp-route-{varname}
               where i choose the variable and set the value in html
               then on the get here, it is passed is as a parameter 
               with the same varname */
-            Console.WriteLine($"Run OnGetDelete()");
-            Console.WriteLine($"URL {id} listtype {listtype} ");
 
             EditBlockList(listtype, id, true);
 
-            Console.WriteLine("about to redirect to GET");
             ///  https://exceptionnotfound.net/implementing-post-redirect-get-in-asp-net-core-razor-pages/
             return RedirectToPage("/BlockLists");
         }
 
         public IActionResult OnGetSwap(string id, string listtype)
         {
-            Console.WriteLine($"Run OnGetSwap()");
-            Console.WriteLine($"URL {id} listtype {listtype} ");
-
             // Delete from current blocklist 
             EditBlockList(listtype, id, true);
 
@@ -72,7 +54,6 @@ namespace PiholeJP.Pages
             // Add domain to the other list
             EditBlockList(otherList, id);
 
-            Console.WriteLine("about to redirect to GET");
             return RedirectToPage("/BlockLists");
         }
 
@@ -100,9 +81,7 @@ namespace PiholeJP.Pages
             /// https://www.michaco.net/blog/EnvironmentVariablesAndConfigurationInASPNETCoreApps
             if (System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
             {
-                Console.WriteLine($"action: {action}");
                 PiResponse = BashCommand.run(action);
-                Console.WriteLine("response: " + PiResponse);
             }
             Message = PiResponse;
         }
@@ -114,7 +93,6 @@ namespace PiholeJP.Pages
             /// https://www.michaco.net/blog/EnvironmentVariablesAndConfigurationInASPNETCoreApps
             if (System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
             {
-                Console.WriteLine($"action: {action}");
                 PiResponse = BashCommand.run(action);
             }
             WhiteList = ParseResponses(PiResponse);
@@ -124,7 +102,6 @@ namespace PiholeJP.Pages
             if (System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
             {
                 BlackList = new List<string>();
-                Console.WriteLine($"action: {action}");
                 PiResponse = BashCommand.run(action);
             }
             BlackList = ParseResponses(PiResponse);

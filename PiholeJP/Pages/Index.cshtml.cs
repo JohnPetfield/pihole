@@ -21,7 +21,6 @@ namespace PiholeJP.Pages
         }
 
         [BindProperty]
-        //[BindProperty(SupportsGet = true)]
         public string action { get; set; }
 
         [BindProperty]
@@ -34,34 +33,25 @@ namespace PiholeJP.Pages
                 action = "status";
             }
 
-            //action = "status";
             runBash();
         }
 
         public IActionResult OnPost()
         {
             runBash();
-            //return RedirectToPage("/Index" , new { piholeResponse = piholeResponse });
-            //return RedirectToPage("/Index",
             return RedirectToPage("/Index");
         }
         private void runBash()
         {
-            //Console.WriteLine("runBash()");
-
             if (string.IsNullOrWhiteSpace(action))
             {
-                //action = "status";
                 piholeResponse = "action blank";
             }
             /// https://www.michaco.net/blog/EnvironmentVariablesAndConfigurationInASPNETCoreApps
             else if (System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
             {
-                Console.WriteLine($"action: {action}");
-
                 string _action = action.ToLower();
 
-                //string action;
                 if (_action == "enable")
                     action = "enable";
                 else if (_action == "disable")
@@ -86,7 +76,6 @@ namespace PiholeJP.Pages
             {
                 piholeResponse = "disabled";
             }
-            Console.WriteLine($"cleansed response: {piholeResponse}");
         }
     }
 }

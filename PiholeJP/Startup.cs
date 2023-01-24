@@ -29,9 +29,7 @@ namespace PiholeJP
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            //THIS ALSO WORKS and is better than app.UsePathBase
             app.UsePathBase("/piholejp");
-
 
             if (env.IsDevelopment())
             {
