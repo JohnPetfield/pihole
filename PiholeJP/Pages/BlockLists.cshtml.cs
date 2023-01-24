@@ -76,7 +76,6 @@ namespace PiholeJP.Pages
             return RedirectToPage("/BlockLists");
         }
 
-
         public string NewBlackListItem;
         public string NewWhiteListItem;
         [BindProperty]
